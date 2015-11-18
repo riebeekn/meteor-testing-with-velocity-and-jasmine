@@ -23,3 +23,13 @@ Template.body.events({
     event.target.text.value = "";
   }
 });
+
+Template.task.events({
+  "click .toggle-checked": function () {
+    // Set the checked property to the opposite of its current value
+    Meteor.call("setCompleted", this._id, ! this.completed);
+  },
+  "click .delete": function () {
+    Meteor.call("deleteTask", this._id);
+  }
+});

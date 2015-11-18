@@ -13,7 +13,8 @@ var destroyTasks = function() {
 var getDefaultTask = function() {
   return {
     text: 'Task text',
-    createdAt: new Date()
+    createdAt: new Date(),
+    completed: false
   }
 };
 

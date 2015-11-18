@@ -18,6 +18,7 @@ describe ("the todo page : new task field", function() {
       var task = Tasks.findOne({text: 'My new task'});
       expect(task).not.toBe(undefined);
       expect(task.text).toEqual('My new task');
+      expect(task.completed).toBe(false);
       done();
     }, 400);
   });
