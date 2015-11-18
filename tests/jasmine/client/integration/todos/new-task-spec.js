@@ -9,18 +9,18 @@ describe ("the todo page : new task field", function() {
     Meteor.setTimeout(function() {
       addTaskViaUI('My new task');
       
-      // check the updated task list
-      var tasks = TodosSpecHelper.retrieveTasksFromUI(); // use the helper
-      expect(tasks.length).toEqual(1);
-      expect(tasks[0]).toEqual('My new task');
-
-      // also check the DB
+      // check the DB
       var task = Tasks.findOne({text: 'My new task'});
       expect(task).not.toBe(undefined);
       expect(task.text).toEqual('My new task');
       expect(task.completed).toBe(false);
       done();
-    }, 400);
+
+      // check the UI
+      var tasks = TodosSpecHelper.retrieveTasksFromUI(); // use the helper
+      expect(tasks.length).toEqual(1);
+      expect(tasks[0]).toEqual('My new task');
+    }, 600);
   });
 
   it ("should clear out the new task field on form submit", function(done) {
@@ -28,7 +28,7 @@ describe ("the todo page : new task field", function() {
       addTaskViaUI('Another new task');
       expect($('.new-task input').val()).toEqual('');
       done();
-    }, 400);
+    }, 600);
   });
   
 });
