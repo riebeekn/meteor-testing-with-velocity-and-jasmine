@@ -11,10 +11,27 @@ var destroyTasks = function() {
 }
 
 var getDefaultTask = function() {
+  var defaultUsername = '';
+  var defaultOwnerId = '';
+
+  // if a user is logged in, assign that user
+  // as the owner of the task, otherwise we'll
+  // default to 'Bob'
+  if (Meteor.user()) {
+    defaultUsername = Meteor.user().username;
+    defaultOwnerId = Meteor.user()._id;
+  } else {
+    var user = Meteor.users.findOne({username: 'Bob'});
+    defaultUsername = user.username;
+    defaultOwnerId = user._id;
+  }
+
   return {
     text: 'Task text',
     createdAt: new Date(),
-    completed: false
+    completed: false,
+    username: defaultUsername,
+    owner: defaultOwnerId
   }
 };
 

@@ -9,12 +9,13 @@ describe ("the todo page : an individual task item", function() {
     Meteor.call('fixtures.destroyTasks');
   });
 
-  it ("should include the task text", function(done) {
+  it ("should include the name of the user who created "
+      + "the task along with the task text", function(done) {
     Meteor.setTimeout(function() {
       var tasks = TodosSpecHelper.retrieveTasksFromUI();
 
       expect(tasks.length).toEqual(1);
-      expect(tasks[0]).toEqual('The task');
+      expect(tasks[0]).toEqual('Bob - The task');
       done();
     }, 400);
   });

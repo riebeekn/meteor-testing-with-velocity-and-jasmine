@@ -14,5 +14,15 @@ Package.onUse(function (api) {
     'mongo',
     'stevezhu:lodash@3.10.1',
   ], 'server');
-  api.addFiles('task-fixtures.js', 'server');
+  api.addFiles([
+    'task-fixtures.js',
+    'user-fixtures.js'
+  ], 'server');
+  api.addFiles([
+    'test-user.js'
+  ], 'client');
+
+  api.export([
+    'TestUser'
+  ]);
 });

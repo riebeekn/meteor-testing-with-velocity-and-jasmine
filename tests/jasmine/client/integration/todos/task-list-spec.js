@@ -18,9 +18,9 @@ describe ("the todo page : task list", function() {
         var tasks = TodosSpecHelper.retrieveTasksFromUI();
 
         expect(tasks.length).toEqual(3);
-        expect(tasks[0]).toEqual('This is task 3');
-        expect(tasks[1]).toEqual('This is task 2');
-        expect(tasks[2]).toEqual('This is task 1');
+        expect(tasks[0]).toEqual('Bob - This is task 3');
+        expect(tasks[1]).toEqual('Bob - This is task 2');
+        expect(tasks[2]).toEqual('Bob - This is task 1');
         done();
       }, 400);
     });
@@ -44,8 +44,8 @@ describe ("the todo page : task list", function() {
           var tasks = TodosSpecHelper.retrieveTasksFromUI();
 
           expect(tasks.length).toEqual(2);
-          expect(tasks[0]).toEqual('This is task 3');
-          expect(tasks[1]).toEqual('This is task 2');
+          expect(tasks[0]).toEqual('Bob - This is task 3');
+          expect(tasks[1]).toEqual('Bob - This is task 2');
           done();
         }, 400);
     });

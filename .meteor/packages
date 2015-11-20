@@ -19,3 +19,5 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 sanjo:jasmine
 velocity:html-reporter
 testing
+accounts-ui
+accounts-password
