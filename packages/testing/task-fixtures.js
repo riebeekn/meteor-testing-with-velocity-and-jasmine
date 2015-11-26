@@ -31,7 +31,8 @@ var getDefaultTask = function() {
     createdAt: new Date(),
     completed: false,
     username: defaultUsername,
-    owner: defaultOwnerId
+    owner: defaultOwnerId,
+    private: false
   }
 };
 

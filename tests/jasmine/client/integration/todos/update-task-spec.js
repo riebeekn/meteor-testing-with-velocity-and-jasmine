@@ -1,4 +1,81 @@
 describe ("the todo page : update task", function() {
+
+  describe ("private and public tasks", function() {
+
+    beforeAll(function() {
+      Package.testing.TestUser.login();
+    });
+    afterAll(function() {
+      Package.testing.TestUser.logout();
+    });
+
+    describe ("public tasks", function() {
+      
+      beforeEach(function() {
+        Meteor.call('fixtures.createTask', 
+          { text: "This is a public task"});
+      });
+      afterEach(function() {
+        Meteor.call('fixtures.destroyTasks');
+      });
+
+      it ("should update the task to private when public button is clicked", function(done) {
+        Meteor.setTimeout(function() {
+          // set the task to private
+          $('.toggle-private').click();
+
+          var taskInDb = Tasks.findOne({text: "This is a public task"});
+          expect(taskInDb.private).toEqual(true);
+          done();
+        }, 400);
+      });
+
+      it ("should update the text of the button to 'private' when the public button is clicked", function(done) {
+        Meteor.setTimeout(function() {
+          $('.toggle-private').click();
+        }, 400);
+        Meteor.setTimeout(function() {
+          expect($('.toggle-private').text().trim()).toEqual('Private');
+          done();
+        }, 800);
+      });
+    
+    });
+
+    describe ("private tasks", function() {
+
+      beforeEach(function() {
+        Meteor.call('fixtures.createTask', 
+          { text: "This is a private task", private: true});
+      });
+      afterEach(function() {
+        Meteor.call('fixtures.destroyTasks');
+      });
+
+      it ("should update the task to public when private button is clicked", function(done) {
+        Meteor.setTimeout(function() {
+          // set the task to private
+          $('.toggle-private').click();
+
+          var taskInDb = Tasks.findOne({text: "This is a private task"});
+          expect(taskInDb.private).toEqual(false);
+          done();
+        }, 400);
+      });
+
+      it ("should update the text of the button to 'public' when the private button is clicked", function(done) {
+        Meteor.setTimeout(function() {
+          $('.toggle-private').click();
+        }, 400);
+        Meteor.setTimeout(function() {
+          expect($('.toggle-private').text().trim()).toEqual('Public');
+          done();
+        }, 800);
+      });
+      
+    });
+
+  });
   
   describe ("completing a task", function() {
     beforeEach(function() {
@@ -40,7 +117,7 @@ describe ("the todo page : update task", function() {
       // activate the checkbox
       $("li").find("input:checkbox").click();
       
-      // find the associated record in the DB and verify
+      // find the associated record in the DB
       var tasks = Tasks.find().fetch();
       expect(tasks[0].completed).toEqual(completeTask);
 

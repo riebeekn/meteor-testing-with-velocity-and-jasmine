@@ -11,13 +11,14 @@ describe ("the todo page : new task field", function() {
     Meteor.call('fixtures.destroyTasks');
   });
   
-    it ("should create a new task on form submit with expected values", function(done) {
+  it ("should create a new task on form submit with expected values", function(done) {
     // submit a new task
     Meteor.setTimeout(function() {
       addTaskViaUI('My new task');
       
       // check the updated task list
       var tasks = TodosSpecHelper.retrieveTasksFromUI();
+      console.log(tasks);
       expect(tasks.length).toEqual(1);
       expect(tasks[0]).toEqual('Bob - My new task');
 
@@ -28,6 +29,7 @@ describe ("the todo page : new task field", function() {
       expect(task.completed).toBe(false);
       expect(task.username).toEqual('Bob');
       expect(task.owner).toEqual(Meteor.userId());
+      expect(task.private).toBe(false);
       done();
     }, 400);
   });

@@ -17,4 +17,12 @@ Meteor.startup(function() {
       password : 'foobar'
     });
   }
+
+  user = Meteor.users.findOne({username: 'Sally'});
+  if (!user) {
+    Accounts.createUser({
+      username: 'Sally',
+      password: 'foobar'
+    });
+  }
 });
